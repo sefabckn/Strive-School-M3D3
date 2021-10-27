@@ -163,7 +163,7 @@
                     This page will dynamically load pictures from the web, and display them in a cool way!
                 </p>
                 <p>
-                    HEAD <a href="#" onclick="loadImages()" class="btn btn-primary my-2">Load Images</a>
+                    <a href="#" onclick="loadImages()" class="btn btn-primary my-2">Load Images</a>
 
                     <!--<a href="#" onclick="requestAPI()" class="btn btn-primary my-2">Load Images</a> -->
                     <a href="#" class="btn btn-secondary my-2">Load Secondary Images</a>
@@ -442,25 +442,26 @@
                     }
                 })
                 .then(resp => resp.json())
-                .then(body => {
+                .then(photos => {
 
-                    console.log(body)
+                    console.log(photos)
 
                     const row = document.querySelector(".row")
-                    for (let i = 0; i < body.lenght; i++) {
-                        const obj = body[i]
+                    for (let i = 0; i < photos.lenght; i++) {
+                        const obj = photos[i]
                         const column = document.createElement("div")
                         column.className = "col-3"
                         column.innerHTML = `
                         <div class="card">
-                            <img src="${obj.img}" class="card-img-top" alt="...">
+                            <img src="https://www.pexels.com/photo/close-up-shot-of-a-text-on-a-gray-surface-8850738/" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">${obj.title}</h5>
-                                <p class="card-text">${obj.price}€</p>
+                                <h5 class="card-title">hi</h5>
+                                <p class="card-text">hi</p>
                             </div>
                         </div>
                         `
                         row.appendChild(column)
+                        body.appendChild(row)
                     }
 
 
