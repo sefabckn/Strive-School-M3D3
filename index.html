@@ -163,7 +163,7 @@
                     This page will dynamically load pictures from the web, and display them in a cool way!
                 </p>
                 <p>
-                    <a href="#" class="btn btn-primary my-2">Load Images</a>
+                    <a href="#" onclick="requestAPI()" class="btn btn-primary my-2">Load Images</a>
                     <a href="#" class="btn btn-secondary my-2">Load Secondary Images</a>
                 </p>
             </div>
@@ -432,6 +432,47 @@
             </p>
         </div>
     </footer>
+    <script>
+        function requestAPI() {
+            fetch('https://api.pexels.com/v1/search?query=your-query', {
+  headers: {Authentication: '563492ad6f9170000100000122778d26e5e74425a0cadff34a31ac4b'}
+})
+
+    // WAITING
+    .then(response => response.json())
+    .then(body => {
+
+        // DOM MANIPULATION
+        console.log(body)
+        const row = document.querySelector(".row")
+
+        for (let i = 0; i < body.length; i++) {
+            const obj = body[i]
+
+            const col = document.createElement("div")
+            col.className = "col-3"
+
+            col.innerHTML = `
+            
+            <div class="card">
+                <img src="${obj.img}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${obj.title}</h5>
+                    <p class="card-text">${obj.price}€</p>
+                </div>
+            </div>
+            `
+
+            row.appendChild(col)
+        }
+
+
+    })
+    .catch(error => console.error(error))
+
+
+}
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
